@@ -48,7 +48,7 @@ function urlParse(url){
 	this.getQueryArray = function(){
 		return this.QueryParams;
 	}
-	//Get value of paramiter in query string
+	//Get value of parameter in query string
 	this.getQueryParam = function(x){
 		return this.QueryParams[x];
 	}

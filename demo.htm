@@ -5,7 +5,8 @@
 	<title>UrlParse Demo</title>
 	<script type="text/javascript" src='urlParse.js'></script> 
 	<script type="text/javascript">
-	var qArray;
+		var qArray;//In global scope so you can play with it via the console.
+		
 		function runDemo(){
 			//Parse url useing parseURl
 			url = document.getElementById('url').value;
@@ -19,13 +20,11 @@
 			
 			//Get array and format it in to a key => value string for display
 			qArray = parsed.getQueryArray();
-			//if(qArray.length < 0){
-				qs = '';
-				for(var i in qArray){
-					if(qArray[i]!=null)qs += '<strong>' + i + '</strong> : ' + qArray[i] + '<br/>';
-				}
-				document.getElementById('query').innerHTML = qs;
-			//}
+			qs = '';
+			for(var i in qArray){
+				if(qArray[i]!=null)qs += '<strong>' + i + '</strong> : ' + qArray[i] + '<br/>';
+			}
+			document.getElementById('query').innerHTML = qs;
 		}
 		function testEnter(e){
 			if(window.event){
