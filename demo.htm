@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-GB">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>UrlParse Demo</title>
+	<script type="text/javascript" src='urlParse.js'></script> 
+	<script type="text/javascript">
+	var qArray;
+		function runDemo(){
+			//Parse url useing parseURl
+			url = document.getElementById('url').value;
+			parsed = urlParse(url);
+			//Output to output table
+			document.getElementById('protocol').innerHTML = parsed.getProtocol();
+			document.getElementById('host').innerHTML = parsed.getHost();
+			document.getElementById('port').innerHTML = parsed.getPort();
+			document.getElementById('path').innerHTML = parsed.getPath();
+			document.getElementById('hash').innerHTML = parsed.getFragment();
+			
+			//Get array and format it in to a key => value string for display
+			qArray = parsed.getQueryArray();
+			//if(qArray.length < 0){
+				qs = '';
+				for(var i in qArray){
+					if(qArray[i]!=null)qs += '<strong>' + i + '</strong> : ' + qArray[i] + '<br/>';
+				}
+				document.getElementById('query').innerHTML = qs;
+			//}
+		}
+		function testEnter(e){
+			if(window.event){
+				if(window.event.keyCode == 13) runDemo();
+			}else{
+				if(e.which == 13) runDemo();
+			}
+		}
+	</script>
+	<style type='text/css'>
+	  body {background-color:#444;}
+	 .demo {width:500px; margin:10px auto;background-color:whitesmoke;}
+	 .demo .form {padding:5px; background-color:#ccc;}
+	 .demo .form h3 {margin:5px;}
+	 #url {width:480px; padding:2px; border:solid 1px;}
+	 .demo .form .test {border:solid 1px; padding:4px;margin:0px;font-weight:bold;cursor:pointer;background-color:#fff;}
+	 .demo .form .test:hover {background-color:#eee;}
+	 .output {text-align:left;width:500px;}
+	 .output tr th {background-color:#ddd; width:100px;}
+	 .output .top {background-color:#666;margin:0;padding:4px;color:#fff;} </style>
+</head>
+<body>
+
+<div class='demo'>
+	<div class='form'>
+		<h3>ParseURL Tester</h3>
+		<input type='text' id='url' value='http://sub.domain.com:1337/test.php?param1=Hello&param2=Goodbye#test' onkeypress="testEnter()"/>
+		<input type='submit' class='test' value='parseUrl' onClick='runDemo(event);'/>
+	</div>
+	<div>
+		<table class='output'>
+			<tr><th colspan='2' class='top'>Output</th></tr>
+			<tr>
+				<th>Protocol:</th>
+				<td id='protocol'></td>
+			</tr>
+			<tr>
+				<th>Host: </th>
+				<td id='host'> </td>
+			</tr>
+			<tr>
+				<th>Port: </th>
+				<td id='port'> </td>
+			</tr>
+			<tr>
+				<th>Path: </th>
+				<td id='path'> </td>
+			</tr>
+			<tr>
+				<th>Query String: </th>
+				<td id='query'> </td>
+			</tr>
+			<tr>
+				<th>Fragment: </th>
+				<td id='hash'> </td>
+			</tr>
+		</table>
+	</div>
+</div>
+</body>
+</html>
