@@ -1,66 +1,67 @@
 /**
  * URL Parse
  * A quick URL parsing function for JavaScript
- * @version 0.3
+ * @version 0.4
  * @author Carl Saggs
  */
 function urlParse(url){
+	var self = {};
 	//Store full url
-	this.url = url;
+	self.url = url;
 	//array to store params
-	this.QueryParams = new Array();
+	self.QueryParams = new Array();
 	//Use DOM to get URL basics
-	this.a = document.createElement('a');
-	this.a.href = url;
+	self.a = document.createElement('a');
+	self.a.href = url;
 	//Parse Query String
-	q_seg = this.a.search.substring(1).split('&');
+	q_seg = self.a.search.substring(1).split('&');
 	for(i=0; i<q_seg.length;i++){
 		s = q_seg[i].split('=');
-		this.QueryParams[s[0]] = s[1];
+		self.QueryParams[s[0]] = s[1];
 	}
 	//Extract the Port
-	this.port = url.split('/')[2].split(':')[1];
+	self.port = url.split('/')[2].split(':')[1];
 	
 	//Return Protocol in use
-	this.getProtocol = function(){
-		return this.a.protocol;
+	self.getProtocol = function(){
+		return self.a.protocol;
 	}
 	//Return Host
-	this.getHost = function(){
-		return this.a.host.split(':')[0];//Remove the port from the end
+	self.getHost = function(){
+		return self.a.host.split(':')[0];//Remove the port from the end
 	}
 	//Return Port
-	this.getPort = function(){
+	self.getPort = function(){
 		//Assume default port if none is set
-		return  (this.port == null)
-				? ((this.getProtocol=='https:')?443:80) 
-				: this.port; 
+		return  (self.port == null)
+				? ((self.getProtocol=='https:')?443:80) 
+				: self.port; 
 	}
 	//Return Path
-	this.getPath = function(){
-		return this.a.pathname;
+	self.getPath = function(){
+		return self.a.pathname;
 	}
 	//Get full Query String
-	this.getQueryString = function(){
-		return this.a.search;
+	self.getQueryString = function(){
+		return self.a.search;
 	}
 	//Get Query String as Array
-	this.getQueryArray = function(){
-		return this.QueryParams;
+	self.getQueryArray = function(){
+		return self.QueryParams;
 	}
 	//Get value of parameter in query string
-	this.getQueryParam = function(x){
-		return this.QueryParams[x];
+	self.getQueryParam = function(x){
+		return self.QueryParams[x];
 	}
 	//Return original URL
-	this.getURL = function(){
-		return this.url;
+	self.getURL = function(){
+		return self.url;
 	}
 	//Get Fragment
-	this.getFragment = function(){
-		return this.a.hash.substring(1);//Remove # from start
+	self.getFragment = function(){
+		return self.a.hash.substring(1);//Remove # from start
 	}
 	
 	//Return self
-	return this;
+	return self;
 }
